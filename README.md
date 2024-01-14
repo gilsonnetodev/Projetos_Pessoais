@@ -1,1 +1,1 @@
-Alguns projetos que estou fazendo com foco de melhorar minhas habilidades em Programação e treinar/estudar constantemente.
+Projetos pessoais para evoluir minhas habilidades como Programador e Melhorar minha lógica de programação.
