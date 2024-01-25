@@ -1,0 +1,105 @@
+from tkinter import *
+from tkinter import ttk
+from tkinter import messagebox
+
+
+def cadastrar():
+    if numero.get() == "" or nome.get() == "" or nota1.get() == "" or nota2.get() == "" or nota3.get() == "" or nota4.get() == "":
+        messagebox.showerror(title= 'ERRO', message=' Digite todos os Dados')
+        return
+    media = (float(nota1.get()) + float(nota2.get()) + float(nota3.get()) + float(nota4.get())) / 4
+    media = f'{media:.1f}'
+    tv.insert("", 'end', values= (numero.get(), nome.get(), nota1.get(),
+            nota2.get(), nota3.get(), nota4.get(), media))
+
+    numero.delete(0,END)
+    nome.delete(0,END)
+    nota1.delete(0,END)
+    nota2.delete(0,END)
+    nota3.delete(0,END)
+    nota4.delete(0,END)
+
+def remover():
+    try:
+        itemSelect = tv.selection()[0]
+        valores = tv.item(itemSelect, 'values')
+        vid = valores[0]
+    except:
+        messagebox.showerror(title= 'ERRO', message='Selecione um Item para Remover')
+    tv.delete(itemSelect)
+
+
+janela = Tk()
+janela.title('Cadastro de Notas')
+janela.resizable(False,False)
+janela.geometry('750x620')
+janela.config(bg = '#003cb3')
+
+texto1 = Label(janela,text= 'Sistema de notas', font= 'play 30', fg= '#ffffff', bg= '#003cb3')
+texto1.place(x=210, y= 10)
+
+texto_num = Label(janela,text='N° do Aluno:', font= 'play 16', fg= '#ffffff', bg= '#003cb3' )
+texto_num.place(x=20, y=70)
+
+numero = Entry(janela,font= 'play 16', bd= 4, bg= '#666666', fg= '#ffffff')
+numero.place(x=140, y=70, width= 45)
+
+texto_nome = Label(janela,text='Nome:', font= 'play 16', fg= '#ffffff', bg= '#003cb3' )
+texto_nome.place(x=370, y=70)
+
+nome = Entry(janela,font= 'play 16', bd= 4, bg= '#666666', fg= '#ffffff')
+nome.place(x=440, y=70)
+
+nota1_texto = Label(janela,text='1° Bim.', font= 'play 16', fg= '#ffffff', bg= '#003cb3' )
+nota1_texto.place(x=60, y=130)
+
+nota1 = Entry(janela,font= 'play 16', bd= 4, bg= '#666666', fg= '#ffffff')
+nota1.place(x=140, y=130, width= 45)
+
+nota2_texto = Label(janela,text='2° Bim.', font= 'play 16', fg= '#ffffff', bg= '#003cb3' )
+nota2_texto.place(x=225, y=130)
+
+nota2 = Entry(janela,font= 'play 16', bd= 4, bg= '#666666', fg= '#ffffff')
+nota2.place(x=305, y=130, width= 45)
+
+nota3_texto = Label(janela,text='3° Bim.', font= 'play 16', fg= '#ffffff', bg= '#003cb3' )
+nota3_texto.place(x=390, y=130)
+
+nota3 = Entry(janela,font= 'play 16', bd= 4, bg= '#666666', fg= '#ffffff')
+nota3.place(x=470, y=130, width= 45)
+
+nota4_texto = Label(janela,text='4° Bim.', font= 'play 16', fg= '#ffffff', bg= '#003cb3' )
+nota4_texto.place(x=565, y=130)
+
+nota4 = Entry(janela,font= 'play 16', bd= 4, bg= '#666666', fg= '#ffffff')
+nota4.place(x=645, y=130, width= 45)
+
+bnt_cadastrar = Button(janela,text= 'Cadastrar', font= 'play 16', bg='#00802b', fg= '#ffffff', bd= 4,
+                        command= cadastrar)
+bnt_cadastrar.place(x=200, y= 180, height= 38)
+
+bnt_remover= Button(janela,text= 'Remover', font= 'play 16', bg='#00802b', fg= '#ffffff', bd= 4,
+                    command= remover)
+bnt_remover.place(x=400, y= 180, height= 38)
+
+tv = ttk.Treeview(janela, columns=('N° do Aluno', 'Nome', '1° Bimestre',
+    '2° Bimestre', '3° Bimestre', '4° Bimestre', 'Média Final'), show= 'headings')
+
+tv.column('N° do Aluno', minwidth=0, width= 80)
+tv.column('Nome', minwidth=0, width= 150)
+tv.column('1° Bimestre', minwidth=0, width= 90)
+tv.column('2° Bimestre', minwidth=0, width= 90)
+tv.column('3° Bimestre', minwidth=0, width= 90)
+tv.column('4° Bimestre', minwidth=0, width= 90)
+tv.column('Média Final', minwidth=0, width= 90)
+
+tv.heading('N° do Aluno', text= 'N° do Aluno')
+tv.heading('Nome', text= 'Nome')
+tv.heading('1° Bimestre', text= '1° Bimestre')
+tv.heading('2° Bimestre', text= '2° Bimestre')
+tv.heading('3° Bimestre', text= '3° Bimestre')
+tv.heading('4° Bimestre', text= '4° Bimestre')
+tv.heading('Média Final', text= 'Média Final')
+tv.place(x=25, y= 230, height=370)
+
+janela.mainloop()
